@@ -1,0 +1,26 @@
+{
+  "name": "newsaggregator-back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "express-mysql-session": "^1.2.3",
+    "express-session": "^1.15.6",
+    "mysql": "^2.14.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.4.1",
+    "eslint-config-airbnb-base": "^11.3.1",
+    "eslint-plugin-import": "^2.7.0"
+  }
+}
