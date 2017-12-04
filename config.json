@@ -1,10 +1,10 @@
 {
   "db": {
-    "host": "localhost",
+    "host": "den1.mysql5.gear.host",
     "port": 3306,
-    "user": "root",
-    "password": "12345",
-    "database": "news_aggregator",
+    "user": "newsgenerator",
+    "password": "Mu0x~K-CfXjX",
+    "database": "newsgenerator",
     "timezone": "utc"
   },
   "web": {
