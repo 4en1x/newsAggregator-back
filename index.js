@@ -16,6 +16,6 @@ auth.init(app);
 router.init(app);
 
 
-app.listen(app.get('port'), () => {
+app.listen(process.env.PORT || app.get('port'), () => {
   console.log(`Server has been started on port ${app.get('port')}`);
 });
