@@ -20,7 +20,7 @@ async function login(req, res) {
         return;
       }
 
-      res.json({ nickname: user.nickname, email: user.email });
+      res.json({ nickname: user.nickname, email: user.email, language: user.language });
     });
   } catch (err) {
     if (err.message === '401') {
@@ -60,13 +60,13 @@ async function register(req, res) {
     user = await db.users.findByField('nickname', req.body.nickname);
 
     if (user) {
-      res.status(409).send({ error: 'nickname already exists' });
+      res.status(409).send({ error: 'nickname' });
       return;
     }
 
     user = await db.users.findByField('email', req.body.email);
     if (user) {
-      res.status(409).send({ error: 'email already exists' });
+      res.status(409).send({ error: 'email' });
       return;
     }
 

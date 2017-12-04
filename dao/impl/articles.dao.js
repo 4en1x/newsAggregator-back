@@ -23,13 +23,12 @@ class ArticlesDAO {
       });
 
       const like = article.like === 0 ? 1 : 0;
-      console.log(like)
+
       await this.connection.queryAsync({
         sql: `UPDATE ${this.tableName} SET \`like\`= ? WHERE id = ?`,
         values: [like, id],
       });
     } catch (err) {
-      console.log(err)
       throw err;
     }
   }
@@ -60,6 +59,7 @@ class ArticlesDAO {
       articles = articles.filter(article => article.urlToImage !== null);
 
       await Promise.all(articles.map(async (article) => {
+        article.description=""
         const { insertId } = await await this.connection.queryAsync({
           sql: `INSERT INTO ${this.tableName} SET ?`,
           values: [article],

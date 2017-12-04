@@ -20,6 +20,7 @@ async function getArticles(req, res) {
 
     res.json(articles);
   } catch (err) {
+    console.log(err)
     res.status(404).end();
   }
 }
