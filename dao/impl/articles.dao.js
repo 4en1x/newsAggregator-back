@@ -47,35 +47,38 @@ class ArticlesDAO {
     }
   }
 
-  async addArticles(articles, userId) {
+  async deleteOne(id) {
     try {
       await this.connection.queryAsync({
-        sql: `DELETE FROM ${this.tableName} 
+        sql: `DELETE FROM ${this.tableName}
+              WHERE id = ?`,
+        values: [id],
+      });
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async findArticles(userId, page) {
+    try {
+      let articles = await this.connection.queryAsync({
+        sql: `SELECT * FROM ${this.tableName}
               WHERE user_id = ? 
-              AND \`like\`= 0`,
-        values: [userId],
+              LIMIT ?, ?`,
+        values: [userId, (page - 1) * 10, 10],
       });
 
-      articles = articles.filter(article => article.urlToImage !== null);
-
-      await Promise.all(articles.map(async (article) => {
-        article.description=""
-        const { insertId } = await await this.connection.queryAsync({
-          sql: `INSERT INTO ${this.tableName} SET ?`,
-          values: [article],
-        });
-
-        article.id = insertId;
+      articles = articles.map((article) => {
         delete article.user_id;
-
         return article;
-      }));
+      });
 
       return articles;
     } catch (err) {
       throw err;
     }
   }
+
 
   async findLiked(userId, page) {
     try {

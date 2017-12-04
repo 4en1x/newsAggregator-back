@@ -1,27 +1,25 @@
 const db = require('../dao/dao');
-const request = require('superagent').agent();
+// const request = require('superagent').agent();
 
 async function getArticles(req, res) {
   try {
-    const response = await request
-      .get(`http://newsapi.org/v2/everything?${req._parsedOriginalUrl.query}&apiKey=b7dd5747a6ab416199e382be3b913d89`)
-      .set('Accept', 'application/json');
-
-    let articles = response.body.articles;
-
-    articles = articles.map((article) => {
-      article.source = article.source.name;
-      article.publishedAt = new Date(article.publishedAt);
-      article.user_id = req.user.id;
-      return article;
-    });
-
-    articles = await db.articles.addArticles(articles, req.user.id);
+    const articles = await db.articles.findArticles(req.user.id, req.query.page);
 
     res.json(articles);
   } catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(404).end();
+  }
+}
+
+async function deleteArticle(req, res) {
+  try {
+    await db.articles.deleteOne(req.params.id);
+
+    res.status(200).end();
+  } catch (err) {
+    console.log(err);
+    res.status(500).end();
   }
 }
 
@@ -58,4 +56,5 @@ module.exports = {
   getArticle,
   likeArticle,
   getLikedArticles,
+  deleteArticle,
 };
