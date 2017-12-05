@@ -59,12 +59,14 @@ class ArticlesDAO {
     }
   }
 
-  async findArticles(userId, page) {
+  async findArticles(userId, page, query) {
     try {
+      query = query ? `AND title LIKE '%${query}%'` : '';
+
       let articles = await this.connection.queryAsync({
         sql: `SELECT * FROM ${this.tableName}
-              WHERE user_id = ? 
-              LIMIT ?, ?`,
+              WHERE user_id = ? ${query} 
+              LIMIT ?, ? `,
         values: [userId, (page - 1) * 10, 10],
       });
 

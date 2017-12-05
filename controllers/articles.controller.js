@@ -3,7 +3,7 @@ const db = require('../dao/dao');
 
 async function getArticles(req, res) {
   try {
-    const articles = await db.articles.findArticles(req.user.id, req.query.page);
+    const articles = await db.articles.findArticles(req.user.id, req.query.page, req.query.title);
 
     res.json(articles);
   } catch (err) {
