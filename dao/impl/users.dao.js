@@ -68,7 +68,6 @@ class UsersDAO {
 
       return insertId;
     } catch (err) {
-      console.log(err);
       throw err;
     }
   }

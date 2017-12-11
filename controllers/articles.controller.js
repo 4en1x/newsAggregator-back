@@ -7,7 +7,6 @@ async function getArticles(req, res) {
 
     res.json(articles);
   } catch (err) {
-    console.log(err);
     res.status(404).end();
   }
 }
@@ -18,7 +17,6 @@ async function deleteArticle(req, res) {
 
     res.status(200).end();
   } catch (err) {
-    console.log(err);
     res.status(500).end();
   }
 }

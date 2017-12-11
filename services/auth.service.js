@@ -34,7 +34,6 @@ function promisifiedAuthenticate(req, res) {
 function init(app) {
   passport.use(new LocalStrategy(strategyOptions, async (email, password, done) => {
     try {
-      console.log('3332222')
       const user = await db.users.findByEmailAndPassword(email, password);
       if (user) {
         return done(null, user);

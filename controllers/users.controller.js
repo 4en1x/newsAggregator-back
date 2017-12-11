@@ -96,10 +96,20 @@ function getUser(req, res) {
   res.json({ nickname: req.user.nickname, email: req.user.email });
 }
 
+async function changeLang(req, res) {
+  try {
+    await db.users.update(req.body);
+    res.status(200).end();
+  } catch (err) {
+    res.status(404).end();
+  }
+}
+
 module.exports = {
   login,
   logout,
   authCheck,
   getUser,
   register,
+  changeLang,
 };
